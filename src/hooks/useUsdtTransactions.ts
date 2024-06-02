@@ -1,24 +1,30 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { JettonMaster, TonClient, Transaction } from '@ton/ton';
-import { Address } from '@ton/core';
-import { isUUID } from '@/helpers/common-helpers.ts';
-import { UsdtTransaction } from '@/types/usdt-transaction.ts';
-import { AccountSubscriptionService } from '@/services/account-subscription.service.ts';
-import { INVOICE_WALLET_ADDRESS, USDT_MASTER_ADDRESS } from '@/constants/common-constants.ts';
-import { useApp } from '@/context/app-context.tsx';
-import { useTonConnect } from '@/hooks/useTonConnect.ts';
-
+import { useCallback, useEffect, useRef, useState } from "react";
+import { JettonMaster, TonClient, Transaction } from "@ton/ton";
+import { Address } from "@ton/core";
+import { isUUID } from "@/helpers/common-helpers.ts";
+import { UsdtTransaction } from "@/types/usdt-transaction.ts";
+import { AccountSubscriptionService } from "@/services/account-subscription.service.ts";
+import {
+  INVOICE_WALLET_ADDRESS,
+  TFJ_MASTER_ADDRESS,
+} from "@/constants/common-constants.ts";
+import { useApp } from "@/context/app-context.tsx";
+import { useTonConnect } from "@/hooks/useTonConnect.ts";
 
 function parseUsdtPayload(tx: Transaction): UsdtTransaction | undefined {
-
   try {
-    if (tx.inMessage?.info.type !== 'internal' || tx.description.type !== 'generic' || tx.description.computePhase?.type !== 'vm') {
+    if (
+      tx.inMessage?.info.type !== "internal" ||
+      tx.description.type !== "generic" ||
+      tx.description.computePhase?.type !== "vm"
+    ) {
       return;
     }
 
     const slice = tx.inMessage.body.beginParse();
     const opcode = slice.loadUint(32);
-    if (opcode !== 0x178d4519) { // jetton internal transfer
+    if (opcode !== 0x178d4519) {
+      // jetton internal transfer
       return;
     }
 
@@ -45,8 +51,8 @@ function parseUsdtPayload(tx: Transaction): UsdtTransaction | undefined {
     }
 
     return {
-      status: tx.description.computePhase.success ? 'succeeded' : 'failed',
-      hash: tx.hash().toString('hex'),
+      status: tx.description.computePhase.success ? "succeeded" : "failed",
+      hash: tx.hash().toString("hex"),
       usdtAmount: jettonAmount,
       gasUsed: tx.totalFees.coins,
       orderId: comment,
@@ -58,31 +64,44 @@ function parseUsdtPayload(tx: Transaction): UsdtTransaction | undefined {
   }
 }
 
-
 export const useUsdtTransactions = (): UsdtTransaction[] => {
   const { tonClient } = useApp();
   const { walletAddress } = useTonConnect();
   const [transactions, setTransactions] = useState<UsdtTransaction[]>([]);
   const intervalId = useRef<number | null>(null);
-  const accountSubscriptionService = useRef<AccountSubscriptionService | null>(null);
+  const accountSubscriptionService = useRef<AccountSubscriptionService | null>(
+    null
+  );
   const effectRan = useRef(false); // double render in dev mode
 
-  const launchSubscriptionService = useCallback(async (tonClient: TonClient, walletAddress: Address) => {
-    if (!tonClient || !walletAddress) return;
-    const jettonMaster = tonClient.open(JettonMaster.create(USDT_MASTER_ADDRESS));
-    const address = await jettonMaster.getWalletAddress(INVOICE_WALLET_ADDRESS);
-    console.log(walletAddress?.toString());
-    accountSubscriptionService.current = new AccountSubscriptionService(tonClient, address, (txs) => {
-      const newUsdtTransactions = txs.map(parseUsdtPayload)
-        .filter((tx): tx is UsdtTransaction => tx?.fromAddress.toString() === walletAddress?.toString());
-      setTransactions((oldTxs) => [
-        ...newUsdtTransactions,
-        ...oldTxs,
-      ]);
-    });
+  const launchSubscriptionService = useCallback(
+    async (tonClient: TonClient, walletAddress: Address) => {
+      if (!tonClient || !walletAddress) return;
+      const jettonMaster = tonClient.open(
+        JettonMaster.create(TFJ_MASTER_ADDRESS)
+      );
+      const address = await jettonMaster.getWalletAddress(
+        INVOICE_WALLET_ADDRESS
+      );
+      console.log(walletAddress?.toString());
+      accountSubscriptionService.current = new AccountSubscriptionService(
+        tonClient,
+        address,
+        (txs) => {
+          const newUsdtTransactions = txs
+            .map(parseUsdtPayload)
+            .filter(
+              (tx): tx is UsdtTransaction =>
+                tx?.fromAddress.toString() === walletAddress?.toString()
+            );
+          setTransactions((oldTxs) => [...newUsdtTransactions, ...oldTxs]);
+        }
+      );
 
-    intervalId.current = accountSubscriptionService.current.start();
-  }, []);
+      intervalId.current = accountSubscriptionService.current.start();
+    },
+    []
+  );
 
   useEffect(() => {
     if (effectRan.current || !walletAddress || !tonClient) return;

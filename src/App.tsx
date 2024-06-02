@@ -49,7 +49,7 @@ function App() {
     <ErrorBoundary fallback={ErrorBoundaryError}>
       <TonConnectUIProvider
         manifestUrl={manifestUrl}
-        actionsConfiguration={{ twaReturnUrl: 'https://t.me/tma_jetton_processing_bot/tma_jetton_processing' }}>
+        actionsConfiguration={{ twaReturnUrl: 'https://t.me/fingerprint_gram_bot/tma' }}>
         <AppProvider>
           <Router location={location} navigator={reactNavigator}>
             <Routes>

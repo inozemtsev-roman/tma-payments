@@ -9,7 +9,7 @@ import { useBackButton } from '@/hooks/useBackButton.ts';
 import { useTonConnect } from '@/hooks/useTonConnect.ts';
 import { JettonWallet } from '@/wrappers/JettonWallet.ts';
 import { calculateUsdtAmount } from '@/helpers/common-helpers.ts';
-import { INVOICE_WALLET_ADDRESS, USDT_MASTER_ADDRESS } from '@/constants/common-constants.ts';
+import { INVOICE_WALLET_ADDRESS, TFJ_MASTER_ADDRESS } from '@/constants/common-constants.ts';
 import { useGenerateId } from '@/hooks/useGenerateId.ts';
 import Header from '@/components/Header';
 import { EmptyCart } from '@/constants/icons.tsx';
@@ -35,10 +35,10 @@ const Cart = () => {
     try {
       if (!tonClient || !walletAddress) return;
 
-      const jettonMaster = tonClient.open(JettonMaster.create(USDT_MASTER_ADDRESS));
-      const usersUsdtAddress = await jettonMaster.getWalletAddress(walletAddress);
+      const jettonMaster = tonClient.open(JettonMaster.create(TFJ_MASTER_ADDRESS));
+      const usersTfjAddress = await jettonMaster.getWalletAddress(walletAddress);
 
-      const jettonWallet = tonClient.open(JettonWallet.createFromAddress(usersUsdtAddress));
+      const jettonWallet = tonClient.open(JettonWallet.createFromAddress(usersTfjAddress));
 
       await jettonWallet.sendTransfer(sender, {
         fwdAmount: 1n,
@@ -49,7 +49,7 @@ const Cart = () => {
       });
       navigate('/transaction-sent');
       setCart({});
-      console.log(`See transaction at https://testnet.tonviewer.com/${usersUsdtAddress.toString()}`);
+      console.log(`See transaction at https://tonviewer.com/${usersTfjAddress.toString()}`);
     } catch (error) {
       console.log('Error during transaction check:', error);
     }
