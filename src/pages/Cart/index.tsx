@@ -82,7 +82,7 @@ const Cart = () => {
               onRemoveProduct={removeProduct}
             />
           ))}
-          <div>Total: ${totalCost.toFixed(9)}</div>
+          <div>Total: {totalCost.toFixed(9)} TFJ</div>
         </>)}
     </div>
   );
