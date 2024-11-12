@@ -83,7 +83,7 @@ const Cart = () => {
               onRemoveProduct={removeProduct}
             />
           ))}
-          <div>Итого: ${totalCost.toFixed(2)}</div>
+          <div>Итого: {totalCost.toFixed(0)} Благо</div>
         </>)}
     </div>
   );
