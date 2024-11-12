@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 import { MinusIcon, PlusIcon } from '@/constants/icons.tsx';
 
 type Props = {
-  Товар: TProduct;
+  product: TProduct;
   onAddProduct: (product: TProduct) => void;
   onRemoveProduct: (product: TProduct) => void;
 }
