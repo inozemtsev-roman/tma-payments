@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 import { MinusIcon, PlusIcon } from '@/constants/icons.tsx';
 
 type Props = {
-  product: TProduct;
+  Товар: TProduct;
   onAddProduct: (product: TProduct) => void;
   onRemoveProduct: (product: TProduct) => void;
 }
@@ -20,7 +20,7 @@ const ProductCard = ({ product, onAddProduct, onRemoveProduct }: Props) => {
         <p className={styles.description}>{description}</p>
       </div>
       {!quantity ? (
-        <Button onClick={() => onAddProduct(product)}>Add to cart</Button>
+        <Button onClick={() => onAddProduct(product)}>Добавить в корзину</Button>
       ) : (
         <div className={styles.controls}>
           <Button className={styles.button} onClick={() => onRemoveProduct(product)}><MinusIcon /></Button>

@@ -20,7 +20,7 @@ const TransactionSent = () => {
     <div className={styles.wrapper}>
       <div className={styles.message}>
         <InfoIcon />
-        <h2>Transaction sent</h2>
+        <h2>Жетоны отправлены</h2>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const Transaction = () => {
 
   const groupedTransactions = useMemo(() => groupByDate(transactions), [transactions]);
 
-  useMainButton({ text: 'Go to shop', onClick: () => navigate('/') });
+  useMainButton({ text: 'Назад в магазин', onClick: () => navigate('/') });
 
   return (
     <div className={styles.wrapper}>
@@ -36,7 +36,7 @@ const Transaction = () => {
       {isEmpty
         ? (<div className={styles.isEmpty}>
           <EmptyFilter />
-          <h4>Nothing found</h4>
+          <h4>Ничего не найдено</h4>
         </div>) :
         (Object.keys(groupedTransactions).map(date => (
           <div key={date} className={styles.block}>

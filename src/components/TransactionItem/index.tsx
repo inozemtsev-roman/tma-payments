@@ -22,11 +22,11 @@ const TransactionItem = ({ tx }: Props) => {
             className={styles.link}
             onClick={() => utils.openLink(`https://${network === CHAIN.TESTNET ? 'testnet.' : ''}tonviewer.com/transaction/${tx.hash}`)}
           >
-            See transaction
+            Смотреть транзакцию
           </button>
           <div className={clsx(styles.label, { [styles.failed]: tx.status === 'failed' })}>{tx.status}</div>
         </div>
-        <p>Price: ${calculateUsdFromUsdt(tx.usdtAmount).toString()}</p>
+        <p>Цена: {calculateUsdFromUsdt(tx.usdtAmount).toString()} Благо</p>
       </div>
     </div>
   );

@@ -15,19 +15,19 @@ const Header = () => {
   const location = useLocation();
 
   return address && <div className={styles.header}>
-      <div className={styles.address}>
-          Address: {separateTonAddress(address)} {network === CHAIN.TESTNET
-        && <span className={styles.label}>testnet</span>}
-      </div>
-      <div className={styles.controls}>
-        {location.pathname !== '/transactions-history'
-          && <button onClick={() => navigate('/transactions-history')}>
-                    <WalletIcon />
-                </button>}
-          <button onClick={() => tonConnectUI.disconnect()}>
-              <DisconnectIcon />
-          </button>
-      </div>
+    <div className={styles.address}>
+      Кошелек: {separateTonAddress(address)} {network === CHAIN.TESTNET
+        && <span className={styles.label}>тестовая сеть</span>}
+    </div>
+    <div className={styles.controls}>
+      {location.pathname !== '/transactions-history'
+        && <button onClick={() => navigate('/transactions-history')}>
+          <WalletIcon />
+        </button>}
+      <button onClick={() => tonConnectUI.disconnect()}>
+        <DisconnectIcon />
+      </button>
+    </div>
   </div>;
 };
 

@@ -52,6 +52,7 @@ const Cart = () => {
       clearCart();
       console.log(`See transaction at https://testnet.tonviewer.com/${usersUsdtAddress.toString()}`);
     } catch (error) {
+      EQBlaryI1HCY6hIlW9giBoqKGtuMHfxlULZOhD6UyzpqLcll
       console.log('Error during transaction check:', error);
     }
   }, [tonClient, walletAddress, sender, orderId, totalCost, clearCart, navigate]);
@@ -61,9 +62,9 @@ const Cart = () => {
   }, [open]);
 
   useMainButton(walletAddress
-    ? (isEmptyCart ? { text: 'Go to shop', onClick: () => navigate('/') }
-      : { text: 'Complete payment', onClick: handleCompletePayment })
-    : { text: 'Connect wallet', onClick: handleConnectWallet });
+    ? (isEmptyCart ? { text: 'Назад в магазин', onClick: () => navigate('/') }
+      : { text: 'Завершить оплатуt', onClick: handleCompletePayment })
+    : { text: 'Подключить кошелек', onClick: handleConnectWallet });
 
 
   return (
@@ -72,7 +73,7 @@ const Cart = () => {
       {isEmptyCart
         ? (<div className={styles.isEmpty}>
           <EmptyCart />
-          <h4>Cart is empty</h4>
+          <h4>Корзина пуста</h4>
         </div>)
         : (<>
           {Object.values(cart).map(product => (
@@ -83,7 +84,7 @@ const Cart = () => {
               onRemoveProduct={removeProduct}
             />
           ))}
-          <div>Total: ${totalCost.toFixed(2)}</div>
+          <div>Итого: ${totalCost.toFixed(2)}</div>
         </>)}
     </div>
   );

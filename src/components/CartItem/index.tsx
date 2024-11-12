@@ -17,7 +17,7 @@ const CartItem = ({ product, onAddProduct, onRemoveProduct }: Props) => {
         <img className={styles.image} src={image} alt={shortName} />
         <div>
           <h5>{shortName}</h5>
-          <p>${(Math.round(price * quantity * 100) / 100).toFixed(2)}</p>
+          <p>{(Math.round(price * quantity * 100) / 100).toFixed(0)} Благо</p>
         </div>
       </div>
       <div className={styles.controls}>

@@ -40,12 +40,12 @@ function Inner() {
     return (
         <TonConnectUIProvider
             manifestUrl={manifestUrl}
-            actionsConfiguration={{ twaReturnUrl: 'https://t.me/tma_jetton_processing_bot/tma_jetton_processing' }}
+            actionsConfiguration={{ twaReturnUrl: 'https://t.me/gradosphera_vote_bot/market' }}
         >
             <TonClientProvider>
                 <AppStateProvider>
                     <SDKProvider acceptCustomStyles debug={debug}>
-                        <App/>
+                        <App />
                     </SDKProvider>
                 </AppStateProvider>
             </TonClientProvider>
@@ -56,7 +56,7 @@ function Inner() {
 export function Root() {
     return (
         <ErrorBoundary fallback={ErrorBoundaryError}>
-            <Inner/>
+            <Inner />
         </ErrorBoundary>
     );
 }
