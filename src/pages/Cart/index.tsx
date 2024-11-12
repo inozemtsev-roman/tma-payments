@@ -52,7 +52,6 @@ const Cart = () => {
       clearCart();
       console.log(`See transaction at https://testnet.tonviewer.com/${usersUsdtAddress.toString()}`);
     } catch (error) {
-      EQBlaryI1HCY6hIlW9giBoqKGtuMHfxlULZOhD6UyzpqLcll
       console.log('Error during transaction check:', error);
     }
   }, [tonClient, walletAddress, sender, orderId, totalCost, clearCart, navigate]);
