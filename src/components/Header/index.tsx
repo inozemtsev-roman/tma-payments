@@ -16,8 +16,8 @@ const Header = () => {
 
   return address && <div className={styles.header}>
     <div className={styles.address}>
-      Кошелек: {separateTonAddress(address)} {network === CHAIN.TESTNET
-        && <span className={styles.label}>тестовая сеть</span>}
+      Кошелек: {separateTonAddress(address)} {network === CHAIN.MAINNET
+        && <span className={styles.label}>основная сеть</span>}
     </div>
     <div className={styles.controls}>
       {location.pathname !== '/transactions-history'
