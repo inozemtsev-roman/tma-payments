@@ -16,7 +16,7 @@ const ProductCard = ({ product, onAddProduct, onRemoveProduct }: Props) => {
       <div className={styles.content}>
         <img className={styles.image} src={image} alt={shortName} />
         <h5>{shortName}</h5>
-        <p>${price}</p>
+        <p>{price} Благо</p>
         <p className={styles.description}>{description}</p>
       </div>
       {!quantity ? (
