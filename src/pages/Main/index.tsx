@@ -23,8 +23,8 @@ const Main = () => {
   }, [open]);
 
   const mainButton = useMainButton(address
-    ? { text: 'View order', onClick: handleViewOrder }
-    : { text: 'Connect wallet', onClick: handleConnectWallet });
+    ? { text: 'Заказ', onClick: handleViewOrder }
+    : { text: 'Подключить кошелек', onClick: handleConnectWallet });
 
   useEffect(() => {
     if (Object.keys(cart).length && !mainButton.isVisible) {

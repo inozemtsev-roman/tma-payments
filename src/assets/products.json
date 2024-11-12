@@ -2,31 +2,17 @@
   "products": [
     {
       "id": 1,
-      "shortName": "Duck 1",
-      "description": "Elegant duck toy with a hat and a purse.",
-      "price": 0.99,
-      "image": "https://i.imgur.com/Y2zTYLC.png"
+      "shortName": "Мешок для мусора",
+      "description": "Брендированный мешек Чистая Лига.",
+      "price": 5,
+      "image": "https://storage.yandexcloud.net/mostro-gm-media/ef05d7dc-262a-fd35-118b-5a8b6171d261/6KN1RAD.jpg"
     },
     {
       "id": 2,
-      "shortName": "Duck 2",
-      "description": "Soft toy duckling with a hat and glasses.",
-      "price": 1.99,
-      "image": "https://i.imgur.com/qCyo3sZ.png"
-    },
-    {
-      "id": 3,
-      "shortName": "Duck 3",
-      "description": "Beach-ready duck toy with sunglasses, bandana, and watches",
-      "price": 2.99,
-      "image": "https://i.imgur.com/1EWcvWU.png"
-    },
-    {
-      "id": 4,
-      "shortName": "Duck 4",
-      "description": "The cutest duckling ever",
-      "price": 9.99,
-      "image": "https://i.imgur.com/VbNOdIQ.png"
+      "shortName": "Брелок для ключей",
+      "description": "Брендированный брелок для ключей. 3Д Печать.",
+      "price": 2,
+      "image": "https://img.freepik.com/premium-photo/blank-white-round-metal-key-chain-with-key-ring-white-background-3d-rendering_476612-229.jpg"
     }
   ]
 }
